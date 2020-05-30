@@ -5,7 +5,19 @@
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-  console.log('hello');
+console.log('hello');
+
+// TODO:
+// Create new weather journal data after the 'Generate' button's
+// 'click' eventListener is triggered
+const newJournalEntry = async event => {
+  let zipCode = document.querySelector('#zip').value;
+  console.log(zipCode);
+}
+
+// Kick off a new weather journal entry (recording its data for the
+// app) when the 'Generate' button is clicked
+document.getElementById('generate').addEventListener('click', newJournalEntry);
 
 const postProjectData = async (url = '', data) => {
   console.log('hello');
