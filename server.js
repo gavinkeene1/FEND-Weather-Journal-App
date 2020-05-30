@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
+// Set up async
 const async = require('async');
 
 // Initialize the main project folder
@@ -34,14 +35,16 @@ function listening() {
 }
 
 //Create post() with url path and a callback function
-app.post('/addZipCode', addZipCode);
+app.post('/addProjectData', addProjectData);
 
-// Create a post route for adding zipcodes to the projectData array
-function addZipCode (req, res) {
+// Create a post route for adding new weather journal data to the
+// projectData array
+// TODO: Add feelings, data, and weather API data to function
+function addProjectData (req, res) {
   const body = req.body
-  projectData.zipCode = body.zipCode;
+  projectData.ProjectData = body.ProjectData;
   res.send('Test the POST route');
   projectData.push(req.body);
   console.log(projectData);
-  console.log('zipcode added');
+  console.log('ProjectData added');
 };
