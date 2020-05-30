@@ -11,8 +11,10 @@ console.log('hello');
 // Create new weather journal data after the 'Generate' button's
 // 'click' eventListener is triggered
 const newJournalEntry = async event => {
-  let zipCode = document.querySelector('#zip').value;
+  const zipCode = document.querySelector('#zip').value;
   console.log(zipCode);
+  const feelings = document.querySelector('#feelings').value;
+  // TODO: Get weather data for the current journal entry
 }
 
 // Kick off a new weather journal entry (recording its data for the
