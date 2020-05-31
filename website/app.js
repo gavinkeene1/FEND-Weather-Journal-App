@@ -1,5 +1,6 @@
-
-/* Global Variables */
+// API Key and URL for the app accessing OpenWeatherMap's API
+const apiKey = 'a1e7e6a472a272ccef18e2b216f28db1';
+const openWeatherURL = 'https://openweathermap.org/';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -14,7 +15,9 @@ const newJournalEntry = async event => {
   const zipCode = document.querySelector('#zip').value;
   console.log(zipCode);
   const feelings = document.querySelector('#feelings').value;
+  console.log(feelings);
   // TODO: Get weather data for the current journal entry
+  // TODO: use separate function for pulling in weather data
 }
 
 // Kick off a new weather journal entry (recording its data for the
