@@ -18,6 +18,8 @@ const newJournalEntry = async event => {
   console.log(feelings);
   // TODO: Get weather data for the current journal entry
   // TODO: use separate function for pulling in weather data
+  const weatherData = await getWeather();
+
 }
 
 // Kick off a new weather journal entry (recording its data for the
@@ -26,7 +28,9 @@ document.getElementById('generate').addEventListener('click', newJournalEntry);
 
 // Create function for taking in Open Weather Map data and passing it
 // into the function that creates new weather journal data entries
-// TODO: Add in necessary arguments for getWeather to return data
+// TODO: Add in necessary arguments for getWeather to return data -
+// Currently getting a url error because fetch argument(s) is
+// not defined by something that will work
 const getWeather = async () => {
   try {
     const response = await fetch(url);
@@ -37,6 +41,9 @@ const getWeather = async () => {
 }
 };
 
+// POST data to the appropriate URL path
+// TODO: Make sure URL path is passed into the function whenever
+// it is called
 const postProjectData = async (url = '', data) => {
   console.log('hello');
 ;
