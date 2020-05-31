@@ -1,6 +1,6 @@
 // API Key and URL for the app accessing OpenWeatherMap's API
-const apiKey = 'a1e7e6a472a272ccef18e2b216f28db1';
-const openWeatherURL = 'https://openweathermap.org/';
+const apiKey = '0e9430ada5b89f2cc3e571dc36a855a0';
+const openWeatherURL = 'https://openweathermap.org/data/2.5/weather';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -13,14 +13,27 @@ console.log('hello');
 // 'click' eventListener is triggered
 const newJournalEntry = async event => {
   const zipCode = document.querySelector('#zip').value;
-  console.log(zipCode);
+  // The zipCode will have to follow with a US country code for now
+  const zipAndCountryCode = `${zipCode},us`;
+  console.log(zipAndCountryCode);
   const feelings = document.querySelector('#feelings').value;
   console.log(feelings);
   // TODO: Get weather data for the current journal entry
   // TODO: use separate function for pulling in weather data
-  const weatherData = await getWeather();
-
+  try{
+  const weatherData = await getWeather(openWeatherURL, apiKey);
+  const newJournalData = {
+    temp: (weatherData.main.temp),
+    date: newDate,
+    feelings
+  };
+  await postData('/addProjectData', newJournalData);
+  const newData = await getData('/get');
+  const projectData = await newData.json();
+} catch (error) {
+  console.log("error", error);
 }
+};
 
 // Kick off a new weather journal entry (recording its data for the
 // app) when the 'Generate' button is clicked
@@ -31,9 +44,10 @@ document.getElementById('generate').addEventListener('click', newJournalEntry);
 // TODO: Add in necessary arguments for getWeather to return data -
 // Currently getting a url error because fetch argument(s) is
 // not defined by something that will work
-const getWeather = async () => {
+const getWeather = async (baseURL, apiKey, zipAndCountryCode = '19901,us') => {
   try {
-    const response = await fetch(url);
+    const response = await fetch(
+      `${baseURL}?zip=${zipAndCountryCode}&appid=${apiKey}`);
     const weatherData = await response.json();
     return weatherData;
   } catch (error) {
@@ -44,7 +58,7 @@ const getWeather = async () => {
 // POST data to the appropriate URL path
 // TODO: Make sure URL path is passed into the function whenever
 // it is called
-const postProjectData = async (url = '', data) => {
+const postProjectData = async (url, data) => {
   console.log('hello');
 ;
     try {
