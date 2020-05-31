@@ -34,10 +34,10 @@ function listening() {
   console.log(`running on localhost: ${port}`);
 }
 
-//Create post() with url path and a callback function
+//Create POST with a URL Path and a Callback Function
 app.post('/addProjectData', addProjectData);
 
-// Create a post route for adding new weather journal data to the
+// Create POST for adding new weather journal data to the
 // projectData array
 // TODO: Add feelings, data, and weather API data to function
 function addProjectData (req, res) {
@@ -48,3 +48,10 @@ function addProjectData (req, res) {
   console.log(projectData);
   console.log('ProjectData added');
 };
+
+// Create a GET route with a URL Path and a Callback Function
+app.get('/get', getProjectData);
+
+function getProjectData (req, res) => {
+  res.send(projectData);
+}
