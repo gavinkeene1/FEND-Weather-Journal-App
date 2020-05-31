@@ -24,6 +24,19 @@ const newJournalEntry = async event => {
 // app) when the 'Generate' button is clicked
 document.getElementById('generate').addEventListener('click', newJournalEntry);
 
+// Create function for taking in Open Weather Map data and passing it
+// into the function that creates new weather journal data entries
+// TODO: Add in necessary arguments for getWeather to return data
+const getWeather = async () => {
+  try {
+    const response = await fetch(url);
+    const weatherData = await response.json();
+    return weatherData;
+  } catch (error) {
+    console.log("error", error);
+}
+};
+
 const postProjectData = async (url = '', data) => {
   console.log('hello');
 ;
@@ -48,7 +61,7 @@ const getProjectData = async url => {
       const newData = await fetch(url);
       console.log(newData);
       return newData;
-    } catch(error) {
+    } catch (error) {
       console.log("error", error);
     }
 };
