@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-const projectData = {};
+const projectData = [];
 
 // Require Express to run server and routes
 const express = require('express');
@@ -24,7 +24,7 @@ const async = require('async');
 app.use(express.static('website'));
 
 // Setup Server
-const port = 8000;
+const port = 3000;
 
 const server = app.listen(port, listening);
 
@@ -52,6 +52,6 @@ function addProjectData (req, res) {
 // Create a GET route with a URL Path and a Callback Function
 app.get('/get', getProjectData);
 
-function getProjectData (req, res) => {
+function getProjectData (req, res) {
   res.send(projectData);
 }
