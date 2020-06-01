@@ -28,8 +28,10 @@ const newJournalEntry = async event => {
     feelings
   };
   await postProjectData('/addProjectData', newJournalData);
+  console.log("postProject awaited");
   const newData = await getProjectData('/get');
   const projectData = await newData.json();
+  console.log("New current data is ready to be used");
 } catch (error) {
   console.log("error", error);
 }
@@ -80,12 +82,13 @@ const postProjectData = async (url, data) => {
 };
 
 const getProjectData = async url => {
+  console.log("Kick off getProjectData");
     try {
       const newData = await fetch(url);
       console.log(newData);
+      console.log("getProjectData has finished");
       return newData;
     } catch (error) {
       console.log("error", error);
     }
-    console.log("getProjectData has finished");
 };
