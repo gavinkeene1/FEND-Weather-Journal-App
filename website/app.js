@@ -8,7 +8,6 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 console.log('Welcome to the Jungle');
 
-// TODO:
 // Create new weather journal data after the 'Generate' button's
 // 'click' eventListener is triggered
 const newJournalEntry = async event => {
@@ -18,8 +17,7 @@ const newJournalEntry = async event => {
   console.log(zipAndCountryCode);
   const feelings = document.querySelector('#feelings').value;
   console.log(feelings);
-  // TODO: Get weather data for the current journal entry
-  // TODO: use separate function for pulling in weather data
+  // Get weather data for the current journal entry
   try{
   const weatherData = await getWeather(openWeatherURL, apiKey);
   const newJournalData = {
@@ -32,6 +30,8 @@ const newJournalEntry = async event => {
   const newData = await getProjectData('/get');
   const projectData = await newData.json();
   console.log("New current data is ready to be used");
+  console.log(projectData);
+  // TODO: this function will pass the current data to updateUI()
 } catch (error) {
   console.log("error", error);
 }
@@ -43,24 +43,19 @@ document.getElementById('generate').addEventListener('click', newJournalEntry);
 
 // Create function for taking in Open Weather Map data and passing it
 // into the function that creates new weather journal data entries
-// TODO: Add in necessary arguments for getWeather to return data -
-// Currently getting a url error because fetch argument(s) is
-// not defined by something that will work
 const getWeather = async (baseURL, apiKey, zipAndCountryCode = '19901,us') => {
   try {
     const response = await fetch(
       `${baseURL}?zip=${zipAndCountryCode}&appid=${apiKey}`);
     const weatherData = await response.json();
+    console.log("getWeather has finished")
     return weatherData;
   } catch (error) {
     console.log("error", error);
 }
-console.log("getWeather has finished.")
 };
 
 // POST data to the appropriate URL path
-// TODO: Make sure URL path is passed into the function whenever
-// it is called
 const postProjectData = async (url, data) => {
   console.log('Kicking off postProjectData');
 ;
@@ -92,3 +87,6 @@ const getProjectData = async url => {
       console.log("error", error);
     }
 };
+
+
+// TODO: update the UI with a new updateUI Function
