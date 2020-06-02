@@ -21,8 +21,8 @@ const newJournalEntry = async event => {
   try{
   const weatherData = await getWeather(openWeatherURL, apiKey);
   const newJournalData = {
-    temp: (weatherData.main.temp),
     date: newDate,
+    temperature: (weatherData.main.temp),
     feelings
   };
   await postProjectData('/addProjectData', newJournalData);
@@ -31,7 +31,8 @@ const newJournalEntry = async event => {
   const projectData = await newData.json();
   console.log("New current data is ready to be used");
   console.log(projectData);
-  // TODO: this function will pass the current data to updateUI()
+  // Pass the new current data to updateUI() to show it on the page
+  updateUI(projectData);
 } catch (error) {
   console.log("error", error);
 }
@@ -90,3 +91,13 @@ const getProjectData = async url => {
 
 
 // TODO: update the UI with a new updateUI Function
+const updateUI = (temperature, date, feelings) => {
+  try{
+    console.log("Kicking off updateUI");
+    document.querySelector('#temp').innerHTML = `Temperature: ${temperature}`;
+    document.querySelector('#date').innerHTML = `Date: ${date}`;
+    document.querySelector('#content').innerHTML = `Feelings: ${feelings}`;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
