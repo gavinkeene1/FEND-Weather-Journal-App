@@ -41,10 +41,13 @@ app.post('/addProjectData', addProjectData);
 // projectData array
 // TODO: Add feelings, data, and weather API data to function
 function addProjectData (req, res) {
-  const body = req.body
-  projectData.ProjectData = body.ProjectData;
-  res.send('Test the POST route');
-  projectData.push(req.body);
+  const {date, temperature, feelings} = req.body;
+  let projectData = {
+    date,
+    temperature,
+    feelings
+  };
+  res.send(projectData);
   console.log(projectData);
   console.log('ProjectData added');
 };
