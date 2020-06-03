@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-const projectData = [];
+const projectData = {};
 
 // Require Express to run server and routes
 const express = require('express');
@@ -39,17 +39,15 @@ app.post('/addProjectData', addProjectData);
 
 // Create POST for adding new weather journal data to the
 // projectData array
-// TODO: Add feelings, data, and weather API data to function
+// Add feelings, data, and weather API data to function
+// TODO: Consider if a way of refactoring would be a good option
 function addProjectData (req, res) {
-  const {date, temperature, feelings} = req.body;
-  let projectData = {
-    date,
-    temperature,
-    feelings
-  };
+  projectData.temperature = req.body.temperature;
+  projectData.date = req.body.date;
+  projectData.feelings = req.body.feelings;
   res.send(projectData);
-  console.log(projectData);
-  console.log('ProjectData added');
+//  console.log(projectData);
+//  console.log('ProjectData added');
 };
 
 // Create a GET route with a URL Path and a Callback Function
