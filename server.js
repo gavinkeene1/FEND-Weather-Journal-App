@@ -28,8 +28,8 @@ const port = 3000;
 
 const server = app.listen(port, listening);
 
+// Create a listening function to show that the server is running
 function listening() {
-  // console.log(server);
   console.log('server running');
   console.log(`running on localhost: ${port}`);
 }
@@ -37,17 +37,15 @@ function listening() {
 //Create POST with a URL Path and a Callback Function
 app.post('/addProjectData', addProjectData);
 
-// Create POST for adding new weather journal data to the
-// projectData array
-// Add feelings, data, and weather API data to function
-// TODO: Consider if a way of refactoring would be a good option
+/* Create POST for adding new weather journal data to the
+projectData array. Add feelings, data, and weather API data
+using a function*/
+//TODO: Consider if a way of refactoring would be a good option
 function addProjectData (req, res) {
   projectData.temperature = req.body.temperature;
   projectData.date = req.body.date;
   projectData.feelings = req.body.feelings;
   res.send(projectData);
-//  console.log(projectData);
-//  console.log('ProjectData added');
 };
 
 // Create a GET route with a URL Path and a Callback Function
