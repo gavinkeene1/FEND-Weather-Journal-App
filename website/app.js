@@ -6,7 +6,7 @@ const openWeatherURL = 'https://api.openweathermap.org/data/2.5/weather';
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-console.log('Welcome to the Jungle');
+// console.log('Welcome to the Jungle');
 
 // Create new weather journal data after the 'Generate' button's
 // 'click' eventListener is triggered
@@ -14,22 +14,22 @@ const newJournalEntry = async event => {
   const zipCode = document.querySelector('#zip').value;
   // The zipCode will have to follow with a US country code for now
   const zipAndCountryCode = `${zipCode},us`;
-  console.log(zipAndCountryCode);
+  // console.log(zipAndCountryCode);
   const feelings = document.querySelector('#feelings').value;
-  console.log(feelings);
+  // console.log(feelings);
   // Get weather data for the current journal entry
   try{
   const weatherData = await getWeather(openWeatherURL, apiKey);
   const newJournalData = {
     date: newDate,
     temperature: (weatherData.main.temp),
-    feelings
+    feelings: feelings
   };
   await postProjectData('/addProjectData', newJournalData);
-  console.log("postProject awaited");
+  // console.log("postProject awaited");
   const newData = await getProjectData('/get');
   const projectData = await newData.json();
-  console.log("New current data is ready to be used");
+  // console.log("New current data is ready to be used");
   console.log(projectData);
   // Pass the new current data to updateUI() to show it on the page
   updateUI(projectData);
@@ -90,13 +90,19 @@ const getProjectData = async url => {
 };
 
 
-// TODO: update the UI with a new updateUI Function
-const updateUI = (temperature, date, feelings) => {
-  try{
+// Update the UI with a new updateUI Function
+// TODO: Consider if a way of refactoring would be a good option
+const updateUI = async () => {
+  const request = await fetch ('/get');
+  try {
+    const journalData = await request.json();
     console.log("Kicking off updateUI");
-    document.querySelector('#temp').innerHTML = `Temperature: ${temperature}`;
-    document.querySelector('#date').innerHTML = `Date: ${date}`;
-    document.querySelector('#content').innerHTML = `Feelings: ${feelings}`;
+    console.log("Temperature is " + journalData.temperature);
+    console.log("Date is " + journalData.date);
+    console.log("Feelings entry is " + journalData.feelings);
+    document.querySelector('#temp').innerHTML = 'Temperature: ' + journalData.temperature;
+    document.querySelector('#date').innerHTML = 'Date: ' + journalData.date;
+    document.querySelector('#content').innerHTML = 'Feelings: ' + journalData.feelings;
   } catch (error) {
     console.log("error", error);
   }
