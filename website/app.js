@@ -82,7 +82,7 @@ const updateUI = async () => {
   const request = await fetch ('/get');
   try {
     const journalData = await request.json();
-    document.querySelector('#temp').innerHTML = 'Temperature: ' + journalData.temperature;
+    document.querySelector('#temp').innerHTML = 'Temperature (kelvins): ' + journalData.temperature;
     document.querySelector('#date').innerHTML = 'Date: ' + journalData.date;
     document.querySelector('#content').innerHTML = 'Feelings: ' + journalData.feelings;
     // Reset the "Enter Zipcode" and "How are you feeling" fields
