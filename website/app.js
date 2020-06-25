@@ -4,7 +4,7 @@ const openWeatherURL = 'https://api.openweathermap.org/data/2.5/weather';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = (d.getMonth()+1)+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 /* Create new weather journal data after the 'Generate' button's
  'click' eventListener is triggered */
